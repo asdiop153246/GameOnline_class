@@ -31,7 +31,6 @@ public class PlayerSpawnScript : NetworkBehaviour
         else
         {
             randPos = new Vector3(loginManager.SpawnPoints[randomnum].transform.position.x, loginManager.SpawnPoints[randomnum].transform.position.y, loginManager.SpawnPoints[randomnum].transform.position.z);
-
         }
         return randPos;
     }

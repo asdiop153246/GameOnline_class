@@ -23,6 +23,7 @@ public class PlayerHealthSystem : NetworkBehaviour
     [ClientRpc]
     public void TakeDamageClientRpc(float damageAmount)
     {
+        if (!IsOwner) return;
         Debug.Log("Damage taken = " + damageAmount);
         if (isDamaged == false)
         {
