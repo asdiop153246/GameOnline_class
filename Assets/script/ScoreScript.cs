@@ -11,10 +11,10 @@ public class ScoreScript : NetworkBehaviour
     TMP_Text p2Text;
     MainPlayerScript mainPlayer;
 
-    public NetworkVariable<int> scoreP1 = new NetworkVariable<int>(5, NetworkVariableReadPermission.Everyone,
+    public NetworkVariable<int> scoreP1 = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Owner);
 
-    public NetworkVariable<int> scoreP2 = new NetworkVariable<int>(5, NetworkVariableReadPermission.Everyone,
+    public NetworkVariable<int> scoreP2 = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone,
     NetworkVariableWritePermission.Owner);
 
     void Start()

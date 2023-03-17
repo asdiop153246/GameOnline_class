@@ -7,11 +7,12 @@ TagManager:
   - MainCanvas
   - DeadZone
   - Bullet
+  - LoginManager
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - groundMask
   - Water
   - UI
   - 

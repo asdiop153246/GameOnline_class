@@ -8,9 +8,11 @@ public class PlayerSpawnScript : NetworkBehaviour
     MainPlayerScript mainPlayer;
     public Behaviour[] scripts;
     private Renderer[] renderers;
+    LoginManagerScript loginManager;
     void Start()
     {
         renderers = GetComponentsInChildren<Renderer>();
+        loginManager = GameObject.FindGameObjectWithTag("LoginManager").GetComponent<LoginManagerScript>();
     }
 
     private void SetPlayerState(bool state)
@@ -20,7 +22,17 @@ public class PlayerSpawnScript : NetworkBehaviour
     }
     private Vector3 GetRandPos()
     {
-        Vector3 randPos = new Vector3(Random.Range(-3, 3), 1, Random.Range(-3, 3));
+        Vector3 randPos;
+        int randomnum = Random.Range(0, 2);
+        if (IsOwner)
+        {
+            randPos = new Vector3(loginManager.SpawnPoints[randomnum].transform.position.x, loginManager.SpawnPoints[randomnum].transform.position.y, loginManager.SpawnPoints[randomnum].transform.position.z);
+        }
+        else
+        {
+            randPos = new Vector3(loginManager.SpawnPoints[randomnum].transform.position.x, loginManager.SpawnPoints[randomnum].transform.position.y, loginManager.SpawnPoints[randomnum].transform.position.z);
+
+        }
         return randPos;
     }
 
@@ -31,7 +43,7 @@ public class PlayerSpawnScript : NetworkBehaviour
     }
 
     //2 Server Send to Client (Run on server)
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void RespawnServerRpc()
     {
         RespawnClientRpc(GetRandPos());
@@ -49,5 +61,7 @@ public class PlayerSpawnScript : NetworkBehaviour
         transform.position = spawnPos;
         yield return new WaitForSeconds(3);
         SetPlayerState(true);
+
+
     }
 }

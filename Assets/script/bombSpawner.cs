@@ -9,6 +9,7 @@ public class bombSpawner : NetworkBehaviour
     public GameObject BombPrefab;
     private List<GameObject> spawnedBomb = new List<GameObject>();
     private OwnerNetworkAnimator ownerNetworkAnimator;
+    private bool delay = false;
 
     private void Start()
     {
@@ -18,23 +19,34 @@ public class bombSpawner : NetworkBehaviour
     void Update()
     {
         if (!IsOwner) return;
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Fire1") && delay == false)
         {
-            ownerNetworkAnimator.SetTrigger("Planting");
+            delay = true;
             SpawnBombServerRpc();
+            StartCoroutine(Shooting());            
+            
         }
     }
 
-    [ServerRpc]
+    IEnumerator Shooting() 
+    {
+        yield return new WaitForSeconds(0.5f);
+        delay = false;
+    }
+
+    [ServerRpc (RequireOwnership = false)]
     void SpawnBombServerRpc()
     {
-        Vector3 spawnPos = transform.position + (transform.forward * -1.5f) + (transform.up * 0.8f);
+        Vector3 spawnPos = transform.position + (transform.forward * 1.5f) + (transform.up * 1.2f);
         Quaternion spawnRot = transform.rotation;
 
         GameObject Bomb = Instantiate(BombPrefab, spawnPos, spawnRot);
         spawnedBomb.Add(Bomb);
         Bomb.GetComponent<bombScript>().bombSpawner = this;
         Bomb.GetComponent<NetworkObject>().Spawn();
+        Bomb.GetComponent<Rigidbody>().AddRelativeForce(new Vector3
+                                                (0, 0, 700));
+
     }
 
     [ServerRpc (RequireOwnership = false)]

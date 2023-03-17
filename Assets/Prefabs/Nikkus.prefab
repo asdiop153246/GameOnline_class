@@ -910,7 +910,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8340428848672077391
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -927,7 +927,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!65 &8144007655741954886
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1086,7 +1086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2cf7a0120cbd24a9935aef476c731b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BombPrefab: {fileID: 4121048031150095646, guid: 6eb69042271b3b14381c34971b3b84ac, type: 3}
+  BombPrefab: {fileID: 2486099457011517364, guid: 2b2c657a0af5b5847940a273f6e31b9c, type: 3}
 --- !u!114 &-7295798662707599409
 MonoBehaviour:
   m_ObjectHideFlags: 0
