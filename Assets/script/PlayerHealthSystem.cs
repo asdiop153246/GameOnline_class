@@ -17,10 +17,9 @@ public class PlayerHealthSystem : NetworkBehaviour
         currentHealth = maxHealth;
         mainPlayer = GetComponent<MainPlayerScript>();        
     }
-    [ClientRpc]
-    public void TakeDamageClientRpc(float damageAmount)
-    {
-        if (!IsOwner) return;
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeDamageServerRpc(float damageAmount)
+    {        
         Debug.Log("Damage taken = " + damageAmount);
         if (isDamaged == false)
         {
@@ -30,18 +29,20 @@ public class PlayerHealthSystem : NetworkBehaviour
         
         if (currentHealth <= 0f)
         {
+            Debug.Log("You're dead");
             this.GetComponent<PlayerSpawnScript>().Respawn();
             currentHealth = maxHealth;
         }
     }
-    
-    private void OnCollisionEnter(Collision collision)
+    public void TakeDamage(float damage)
     {
-        if (!IsOwner) return;
-        if (collision.gameObject.tag == "Bullet")
+        Debug.Log("In TakeDamage");
+        if (!IsOwner)
         {
-            TakeDamageClientRpc(damage);
+            return;
         }
+
+        TakeDamageServerRpc(damage);
     }
 
     IEnumerator DelayHp(float damageAmount)

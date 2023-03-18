@@ -320,8 +320,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acc238541eedc6d4aaeb63415cd70a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firePoint: {fileID: 2486099457011517367}
   bombSpawner: {fileID: 0}
   bombEffectPrefab: {fileID: 9184241070383507921, guid: f7bb32e20c4c1204ab94302eac76fe99, type: 3}
+  damage: 10
 --- !u!65 &-6955469521175828627
 BoxCollider:
   m_ObjectHideFlags: 0
